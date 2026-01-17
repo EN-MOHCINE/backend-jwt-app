@@ -70,7 +70,7 @@ const login = async ({ email, password }) => {
 const refreshToken = async (token) => {
   const jwt = require('jsonwebtoken');
   const jwtConfig = require('../../config/jwt');
-
+  
   try {
     const decoded = jwt.verify(token, jwtConfig.refreshTokenSecret);
     

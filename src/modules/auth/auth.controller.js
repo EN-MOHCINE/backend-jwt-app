@@ -28,6 +28,7 @@ const refreshToken = async (req, res, next) => {
   try {
     const { refreshToken } = req.body;
     const result = await authService.refreshToken(refreshToken);
+
     return successResponse(res, 200, 'Token refreshed successfully', result);
   } catch (error) {
     next(error);
