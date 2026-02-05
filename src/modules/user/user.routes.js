@@ -9,13 +9,18 @@ const checkPermission = require('../../middlewares/permission.middleware');
 router.use(authMiddleware);
 
 // Profile routes
-router.get('/profile', checkPermission('view_profile1'),  userController.getProfile);
+router.get('/profile', checkRole(['admin' ,'user' ,'manager']),  userController.getProfile);
 router.put('/profile', userController.updateProfile);
 router.put('/change-password', userController.changePassword);
-router.post('/avatar', uploadMiddleware.single('avatar'), userController.uploadAvatar);
+router.post('/avatar', uploadMiddleware.single('avatar'), userController.uploadAvatar)
+// uploadMiddleware.array('photos', 5)
 
 // Admin routes (you can add role-based middleware here)
 router.get('/all-users', checkRole(['admin1']), userController.getAllUsers);
 router.delete('/:id', userController.deleteUser);
 
 module.exports = router;
+
+
+// how to hceck  permission 
+// router.get('/profile', checkPermission('view_profile'),  userController.getProfile);
